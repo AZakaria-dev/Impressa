@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image → STL (Relief Generator)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-4xl mx-auto p-6">
+    <header class="mb-6">
+      <h1 class="text-3xl font-bold">Image → STL (Heightmap Relief)</h1>
+      <p class="text-gray-600 mt-2">Upload an image, tweak enhancement settings, optionally use Gemini, and generate a printable 3D STL.</p>
+    </header>
+
+    <form action="/preview" method="post" enctype="multipart/form-data"
+          class="space-y-6 bg-white p-6 rounded-2xl shadow">
+
+      <!-- Upload -->
+      <div>
+        <label class="block font-medium mb-2">Upload Image</label>
+        <input name="image" type="file" accept="image/*"
+               class="block w-full border rounded p-2">
+      </div>
+
+      <!-- Enhancement controls -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-4 border rounded-xl">
+          <h2 class="font-semibold mb-3">Enhancement</h2>
+
+          <label class="block text-sm">Brightness (0.5–1.5)</label>
+          <input name="brightness" type="number" step="0.05" value="1.0"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm">Contrast (0.5–1.8)</label>
+          <input name="contrast" type="number" step="0.05" value="1.0"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm">Gamma/Exposure (0.6–1.6)</label>
+          <input name="gamma" type="number" step="0.05" value="1.0"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm">Sharpen (0–2)</label>
+          <input name="sharpen" type="number" step="0.1" value="0.0"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm">Denoise (0–2)</label>
+          <input name="denoise" type="number" step="0.1" value="0.0"
+                 class="w-full border rounded p-2 mb-3">
+        </div>
+
+        <div class="p-4 border rounded-xl">
+          <h2 class="font-semibold mb-3">Heightmap Settings</h2>
+
+          <label class="block text-sm">Base thickness (mm)</label>
+          <input name="base_mm" type="number" step="0.1" value="0.4"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm">Smoothing (Gaussian σ)</label>
+          <input name="smooth" type="number" step="0.1" value="0.0"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm">Max grid (resolution cap)</label>
+          <input name="max_grid" type="number" step="10" value="300"
+                 class="w-full border rounded p-2 mb-3">
+
+          <label class="block text-sm mb-1">Height rule</label>
+          <select name="dark_higher" class="border rounded p-2 w-full">
+            <option value="dark" selected>Darker is higher</option>
+            <option value="light">Lighter is higher</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Gemini -->
+      <div class="p-4 border rounded-xl">
+        <h2 class="font-semibold mb-3">Optional: Gemini Enhancement</h2>
+        <p class="text-sm text-gray-600 mb-3">
+          Enable this to let Gemini suggest brightness/contrast/gamma/sharpen/denoise adjustments.
+        </p>
+        <div class="flex items-center gap-3 mb-3">
+          <input id="use_gemini" name="use_gemini" type="checkbox"
+                 class="h-4 w-4">
+          <label for="use_gemini" class="text-sm">Use Gemini for Smart Enhancement</label>
+        </div>
+        <label class="block text-sm">Gemini API Key (optional)</label>
+        <input name="gemini_key" type="password" placeholder="AIza..."
+               class="w-full border rounded p-2">
+      </div>
+
+      <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl px-4 py-2"
+              type="submit">
+        Generate Preview
+      </button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STL Ready</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div class="max-w-xl mx-auto p-8 text-center bg-white rounded-2xl shadow">
+    <h1 class="text-2xl font-bold mb-4">Your STL is Ready 🎉</h1>
+
+    <a href="/download/{{ stl_name }}" 
+       class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl px-4 py-2 mb-4">
+       Download {{ stl_name }}
+    </a>
+
+    <p class="text-gray-600 mb-6">
+      File saved in <code>exports/{{ stl_name }}</code> on the server.
+    </p>
+
+    <!-- 🔹 New Button to Return to Home -->
+    <a href="/" 
+       class="inline-block bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl px-4 py-2">
+       ⬅ Back to Home
+    </a>
+  </div>
+</body>
+</html>
